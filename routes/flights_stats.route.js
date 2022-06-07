@@ -21,4 +21,8 @@ router.get("/outbound", (req, res, next) => {
     flightStatsController.totalOutboundFlights(req, res, next);
 });
 
+router.get("/delayed", (req, res, next) => {
+    flightStatsController.delayedFlights(req, res, next);
+})
+
 module.exports = router;

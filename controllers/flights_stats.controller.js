@@ -11,6 +11,9 @@ let controllers = {
     },
     totalOutboundFlights: (req, res, next) => {
         flightStatsService.totalOutboundFlights(req, res, next);
+    },
+    delayedFlights: (req, res, next) => {
+        flightStatsService.totalDelayes(req, res, next);
     }
 }
 

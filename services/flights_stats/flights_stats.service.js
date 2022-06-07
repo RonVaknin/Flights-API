@@ -5,8 +5,10 @@ const axios = require("axios");
 const flights_endpoint = "action/datastore_search";
 const flights_query = "?resource_id=e83f763b-b7d7-479e-b172-ae981ddc6de5&limit=300";
 const inbound_flights_filter = 'filters={"CHCINT":""}';
+const delayed_flights_filter = 'filters={"CHRMINE":"DELAYED"}';
 
 function getCountryQuery(country) {
+    //TODO:: restrict to only country by: CHLOCCT to be added to filters and uppercase country name
     return "q=" + country;
 }
 
@@ -74,6 +76,18 @@ const services = {
             })
         })
         
+    },
+    totalDelayes: (req, res, next) => {
+        let full_query = flights_endpoint.concat(flights_query, '&', delayed_flights_filter);
+        axios.get(full_query)
+            .then((response) => {
+                let data = response.data;
+                let total = data.result.total;
+                res.status(200).send(total.toString());
+            })
+            .catch((error) => {
+                res.sendStatus(error.response.status);
+            })
     },
     mostPopularDestination: (req, res, next) => {
 
