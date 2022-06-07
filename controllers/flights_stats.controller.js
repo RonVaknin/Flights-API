@@ -5,6 +5,12 @@ const {flightStatsService} = require("../services");
 let controllers = {
     totalFlights: (req, res, next) => {
         flightStatsService.totalFlights(req, res, next);
+    },
+    totalInboundFlights: (req, res, next) => {
+        flightStatsService.totalInboundFlights(req, res, next);
+    },
+    totalOutboundFlights: (req, res, next) => {
+        flightStatsService.totalOutboundFlights(req, res, next);
     }
 }
 

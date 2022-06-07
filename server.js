@@ -8,7 +8,7 @@ const {flightStats} = require("./routes");
 
 app.use(express.json());
 
-app.use("/stats", flightStats);
+app.use("/flights/stats", flightStats);
 
 app.listen(port, () => {
     console.log("Server is listening on port " + port);
