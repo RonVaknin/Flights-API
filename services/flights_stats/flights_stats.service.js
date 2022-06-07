@@ -3,9 +3,12 @@ const axios = require("axios");
 
 //api variables
 const flights_endpoint = "action/datastore_search";
-const flights_query = "?resource_id=e83f763b-b7d7-479e-b172-ae981ddc6de5&limit=300";
+const flights_limit = "limit=1";
+const flights_recource = "resource_id=e83f763b-b7d7-479e-b172-ae981ddc6de5";
+const flights_query = "?" + flights_recource + '&' + flights_limit;
 const inbound_flights_filter = 'filters={"CHCINT":""}';
 const delayed_flights_filter = 'filters={"CHRMINE":"DELAYED"}';
+const city_name_filter = "fields=CHLOC1T";
 
 function getCountryQuery(country) {
     //TODO:: restrict to only country by: CHLOCCT to be added to filters and uppercase country name
@@ -90,7 +93,31 @@ const services = {
             })
     },
     mostPopularDestination: (req, res, next) => {
+        //TODO:: paginate
+        let flights_limit_override = "10000";
+        let full_query = flights_endpoint.concat('?', flights_recource, '&limit=', flights_limit_override, '&', city_name_filter);
+        let counts = [];
+        axios.get(full_query)
+        .then((response) => {
+            let records = response.data.result.records;
+            let current_max = 0;
+            let most_popular = '';
+            records.forEach(function (x) { 
+                if(!x.CHLOC1T) {
+                    return;
+                }
 
+                counts[x.CHLOC1T] = (counts[x.CHLOC1T] || 0) + 1;
+                if(current_max < counts[x.CHLOC1T] && most_popular != x.CHLOC1T){
+                    current_max = counts[x.CHLOC1T];
+                    most_popular = x.CHLOC1T;
+                }
+            });
+
+            res.status(200).send(most_popular);
+        }).catch((error) => {
+            res.sendStatus(error.response.status);
+        });
     }
 
 }

@@ -14,6 +14,9 @@ let controllers = {
     },
     delayedFlights: (req, res, next) => {
         flightStatsService.totalDelayes(req, res, next);
+    },
+    popularFlights: (req, res, next) => {
+        flightStatsService.mostPopularDestination(req, res, next);
     }
 }
 

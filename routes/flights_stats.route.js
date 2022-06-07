@@ -25,4 +25,8 @@ router.get("/delayed", (req, res, next) => {
     flightStatsController.delayedFlights(req, res, next);
 })
 
+router.get("/popular", (req, res, next) => {
+    flightStatsController.popularFlights(req, res, next);
+})
+
 module.exports = router;
