@@ -20,3 +20,7 @@
 ### GET /flights/stats/inbound
 ##### Parameters
 * country - text [optional]
+
+### GET flights/stats/delayed
+
+### GET flights/stats/popular
