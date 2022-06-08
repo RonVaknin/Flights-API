@@ -86,10 +86,8 @@ const services = {
                     console.warn(error);
                     res.sendStatus(error.response.status);
                 });
-                
-        } while ( (total < limit + offset && current_time > flight_date) || (outbound_flight_date !== 0 && inbound_flight_date !== 0) );
 
-console.log( outbound_flight_code + " " + inbound_flight_code + " " + outbound_flight_code + " " + inbound_flight_code);
+        } while ( (total < limit + offset && current_time > flight_date) || (outbound_flight_date !== 0 && inbound_flight_date !== 0) );
 
         let result = {};
         if(outbound_flight_code){
