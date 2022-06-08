@@ -119,7 +119,6 @@ const services = {
             res.sendStatus(error.response.status);
         });
     }
-
 }
 
 module.exports = services;

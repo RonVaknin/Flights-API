@@ -1,3 +1,6 @@
 const flightStatsController = require("./flights_stats.controller");
-
-module.exports = { flightStatsController }
+const flightGetAwayController = require("./flight_getaway.controller");
+module.exports = { 
+    flightStatsController,
+    flightGetAwayController,
+}
